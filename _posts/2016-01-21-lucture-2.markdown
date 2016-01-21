@@ -1,0 +1,126 @@
+---
+layout: post
+title:  "Lecture 2"
+date:   2016-01-21 10:15:29 +0100
+categories: lecture2
+---
+
+
+
+## Intro
+
+Chapter 20-22
+
+
+## Computer networking
+
+* A network provides connectivity among a set of computers
+* A computer network is a collection of autonomous computers interconnected
+
+
+## Traceroute
+
+traceroute shows the way you are travelling to the server.
+The hops that is show are the routern witch the package travels trough.
+
+{% highlight bash %}
+➜  ~  traceroute google.com
+traceroute to google.com (216.58.209.110), 64 hops max, 52 byte packets
+ 1  10.252.0.1 (10.252.0.1)  10.766 ms  11.658 ms  9.781 ms
+{% endhighlight %}
+
+
+
+## Universal service
+
+Old telephones are useful because telephone can reach any other telephone
+
+Universal service among computers greatly.
+
+To provide universal service among all computers on an internet, routers must agree to forward information from a source on one network to a specific destination on another network.
+The task is complex because frame formats and addressing schemes used by the underlying networks can differ.
+
+
+## Internetworking
+
+* "A protocol for Packet Network Intercommunication"(Cerf & Kahn -1974)
+* Routers forward packaets fom source to destination, may cross many separate networks along the way
+* All packets use a common Internet Protocol(IP)
+  * Any underlying data link protocol
+  * Any higher layer transport protocol
+
+
+
+## Protocols and layers
+
+* Higher layers
+  * Application
+  * Presentation
+* Middle layers
+  * Session
+  * Transport
+  * Network
+* Lower layers
+  * Data link
+  * Physical
+
+
+## Routers
+
+A router is a strore-and-forward devide:
+
+* Routers are connectied to multiple netwroks
+* on each network
+
+
+## Internet Protocol(IP)
+
+Imposes few demands on the network
+
+* Make few assumptions about what network can do
+* No QoS, no reliability, no ordering, no large packets
+* No persistent state about communications, no connections.
+
+
+Manage heterogeneity at hosts (not in network)
+
+
+## IP delivery model
+
+Best Effort Service, network will do
+
+
+## What does IP do?
+
+
+## IP Address (IPv4)
+
+* A unique 32-bit number
+* Intentifies an interface (on a host, on a router, ...)
+* Represented in dotted-quad notation (a.b.d.c)
+  * Each quad is 8 bits
+  * ex: 192.168.0.1
+* Hierarchical: Network and host parts
+
+
+
+## Grouping related hosts
+
+The Internet is an "inter-neetwork"
+
+* used to connect networks together, not hosts
+* needs way to address a network (i.e., group of hosts)
+
+
+
+## CIDR?
+
+* CIDR makes packet forwarding harder.
+* Efficient
+
+
+## MTU?
+
+* Largest IP datagram that can be carrried within a frame
+* Typically 1500 bytes for Ethernet
+
