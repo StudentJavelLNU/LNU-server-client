@@ -1,0 +1,148 @@
+---
+layout: post
+title:  "Lecture 4 TCP/UDP cont."
+date:   2016-01-28 10:15:29 +0100
+categories: lecture2
+---
+
+## Transport layers
+
+* 5. Application
+* 4. Transport, TCP
+* 3. Network, IP, PORTS
+* 2. Data link, MAC
+* 1. Physical, CAT-6
+
+## Demultiplexing
+
+Run many services on the same machine, this is solved with ports.
+HTTP: 80, HTTPS: 443
+
+
+## Ports
+
+Ports under 1k are reserved (1-1024).
+
+Show open ports and connections?
+{% highlight bash %}
+netstat -nr
+{% endhighlight %}
+
+
+## Transport layer
+
+Implements:
+
+* (De)multiplexing
+* Error detection
+* Reliability
+* Flow control
+
+
+## 
+
+
+## Ports
+
+* 0xFFFF
+* 1111111111111111
+* 65535
+
+
+## TCP/UDP
+
+TCP: Needs to create a socket and the start to listen.
+UDP: Just open a socket and recieve.
+
+## TCP
+
+* Connection oriented
+* Flow control
+* Congestion control
+
+
+## Sequence numbers
+
+For control over the sequence, know if some packet are lost.
+
+## Challenges of reliable data transfer
+
+How do we make transfer reliable, we have seq numbers.
+We use ACK to the sender if we recieve in a good way. If sender dont get an ACK it sends again.
+If errors when it got to the reciever the reciever send a ACK and sender sends again.
+
+Sender:
+* Send something
+* Timeout, how long?
+* Get ACK
+
+Reciever:
+* Get something
+* Send ACK
+
+## Timeout
+
+Too short:
+
+* Wasted retransmissions.
+
+Too long:
+
+* Excessive delays when packet arives.
+
+### RTT, Rout Trip Time
+
+[YouTube](https://www.youtube.com/watch?v=Y5y85Lc7vOk)
+
+ACK should arrive after RTT + fudge factor for queuing.
+How does sender know RTT? Can estimate RTT by watching the ACKs. Smooth estimation.
+!!Check EWMA!!
+
+
+
+## Sliding window
+
+* [YouTube](https://www.youtube.com/watch?v=elq4gEeFmg4) have many more videos on networking.
+* [Wikipedia](https://en.wikipedia.org/wiki/Sliding_window_protocol)
+
+![slidingwindowimg](http://wiki.treck.com/images/d/d4/Fig1.39_Sliding_Window_Protocol.gif)
+
+Data we can send before we get an ACK.
+
+Like a buffer?
+
+* Windows size:
+  * The size of the buffer
+  * We dont need to use the full window, but then we dont use all of its capacity
+  * Can only ACK the package that is last (<-) in the window
+  * If problem with last package (delays/corrupted) we cant send ACK to the other packages in the window.
+  * Window size can change. Sender (server)is responsible for the window size.
+    * This is because of the location of the server, response times.
+
+
+## TCP Connection
+
+Three way handshake
+
+Start:
+* Used to initialize TCP connection
+* SYN-ACK
+* Resends if some packet in the SYN-ACK handshake is lost.
+
+Close:
+* FIN
+
+
+
+## Congestion?
+
+## Demux table?
+
+## Demultiplexing?
+[YouTube](https://www.youtube.com/watch?v=Q0FCW9TFlbs)
+
+
+## Check python UDP server/client from slides?
+
+## Automatic Repeat reQuest (ARQ)?
+[YouTube](https://www.youtube.com/watch?v=XLEBBBYnE8U)

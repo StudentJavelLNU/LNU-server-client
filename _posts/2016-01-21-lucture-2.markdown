@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lecture 2"
+title:  "Lecture 2, Internet layer, IP"
 date:   2016-01-21 10:15:29 +0100
 categories: lecture2
 ---
@@ -124,3 +124,7 @@ The Internet is an "inter-neetwork"
 * Largest IP datagram that can be carrried within a frame
 * Typically 1500 bytes for Ethernet
 
+
+## IP model
+
+![ipmodel](http://www.novell.com/documentation/nw6p/tcpipenu/graphics/con_022a.gif)

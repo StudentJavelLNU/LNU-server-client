@@ -1,0 +1,148 @@
+---
+layout: post
+title:  "Lecture 3, IP"
+date:   2016-01-26 15:15:29 +0100
+categories: lecture1
+---
+
+## Resources
+
+* Chapter 25-25
+* Netcar, nc
+
+* 1 Application
+* 2 Transport: TCP/UDP
+* 3 Network: IP
+* 4 Data link
+* 5 Physical:
+
+
+## IP model
+
+![ipmodel](http://www.novell.com/documentation/nw6p/tcpipenu/graphics/con_022a.gif)
+
+## What IP does not do?
+
+Does NOT guarantee:
+
+* any maxmmun latency or even ultimate success
+* sender will be informed if packet do....
+
+
+## Transport layer
+
+* (De)multiplexing
+
+* UDP / TCP
+
+## User Datagram Protocol, UDP
+
+* Datagram
+  * demultiplexing of messages: port numbers
+  * detecting corrupted messages: checksum
+* Lightweigth communication between processes
+  * send messags to and receive them from a socket
+  * avoid overhead and delays
+
+
+{% highlight bash %}
+
+•---------------------•
+| SRC port | DST port |
+|----------+----------|  <-- 8bytes overhead in header section
+|  Length  | Checksum |
+|----------+----------|
+|                     |
+|        Data         |
+|                     |
+•---------------------•
+
+{% endhighlight %}
+
+
+## Why UDP?
+
+* Fine control over what data is sent and when
+  * as soon as app process writes int socket
+  * ...UDP will package data and send packet
+* No delay for connection establishment
+* No connection state
+
+## Usage:
+
+* Simple query protocols such as DNS
+  * overhead of connection establishment is overkill
+
+
+
+![routing](https://upload.wikimedia.org/wikipedia/commons/2/22/IP_Routing_%C3%BCber_Netzwerke.png)
+
+
+## Transmission COntrol Protocol, TCP
+
+* Stream-of-bytes service: Send/Recv streams, not msgs
+* Reliable, in-order delivery
+  * checksums to detect currupted data
+  * sequence number to detect losses and reorder data
+  * acknowledgments & retransmissions for reliable delivery
+  * package nr ex, 1, 2, 3, 4, 5
+  * There is a detection on this packages, if someone is lost a resend is made.
+
+
+{% highlight bash %}
+  •-------------------------------+-------------------------------•
+  |          Source Port          |       Destination Port        |
+  |-------------------------------+-------------------------------|
+  |                        Sequence Number                        | Min header: 20 bytes
+  |---------------------------------------------------------------| Max header: 60 bytes
+  |                    Acknowledgment Number                      |
+  |-------------------+-+-+-+-+-+-+-------------------------------|
+  |  Data |           |U|A|P|R|S|F|                               |
+  | Offset| Reserved  |R|C|S|S|Y|I|            Window             |
+  |       |           |G|K|H|T|N|N|                               |
+  |-------+-----------+-+-+-+-+-+-+-------------------------------|
+  |           Checksum            |         Urgent Pointer        |
+  |---------------------------------------------------------------|
+  |                     Options (variables)                       |
+  |---------------------------------------------------------------|
+  |                            Data                               |
+  •---------------------------------------------------------------•
+  
+{% endhighlight %}
+
+Flags:
+
+* **SYN**
+* **ACK**
+* **FIN**
+* **RST**
+* PSH
+* URG
+
+
+## TCP Segment
+
+* IP packet, no bigger then MTU (usually 1500 bytes)
+* TCP sement, no bigger then Max Segments Size (MSS)
+  * e.g., up to 1460 conse
+
+
+## Sequence numbers
+
+* ISN (Initial sequence number)
+* Traditionally: clcok-based
+  * what if port realloc'd and old packet in flight?
+  * ISN based on clock, wraps around every 4.55 hr
+* Now:
+  * Randomized number (seq)
+  * Hard to guess, thus harder to "hijack" a TCP connection
+
+## Challenges of reliable data transfer
+
+
+## ARQ
+
+## RTT
+
+
+ ! Kolla till sida 42 i slidesen !
