@@ -1,0 +1,69 @@
+---
+layout: post
+title:  "Lecture 5"
+date:   2016-02-02 15:22:29 +0100
+categories: lecture5
+---
+
+### DNS
+
+* Herical system
+* 13 root server in the world
+* many instances of this server are running virtually
+
+
+
+* FQDN,
+*
+
+### TLD server
+
+* TLD = Top Level Domain
+* gTLD (org, com, net, ...)
+* ccTLD (.se, .dk, uk, ...)
+* Typically managed professionally
+* Network Solutions maintains server for .com
+* Educause maintains server for .edu
+
+
+### DNS Caching
+
+
+### DNS REsource Records
+
+* A
+* AAAA, IPv6
+* CNAME
+* MX
+* NS
+
+### DNS Protocol
+
+* Works in Application Layer
+* Based on UDP
+* Port 53
+
+
+### Internel Control
+
+* DHCP
+* ARP
+* ICMP
+
+### Bootstrapping
+
+Things we need:
+
+* IP address
+* DNS server
+* Netmask
+* Router
+
+
+### Broadcasting
+
+### Multicasting
+
+### ARP
+
+* Every node maintains an ARP table
