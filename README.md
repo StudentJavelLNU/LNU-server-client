@@ -1,6 +1,7 @@
 
 ## Assignments
 
+* [Assignment 1.1](https://github.com/jherrlin/Computer-Networks-1DV701/blob/master/images/assignment1.1.png)
 * [Assignment 1.2](https://github.com/jherrlin/Computer-Networks-1DV701/tree/v1.2)
 
 ## Requirements
