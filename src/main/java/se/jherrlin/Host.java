@@ -17,11 +17,27 @@ public abstract class Host{
 
     public Host(CommandLine cmd) {
         this.mode = cmd.getOptionValue("m");
-        this.port = cmd.getOptionValue("p") == null ? 4950 : Integer.parseInt(cmd.getOptionValue("p"));
-        this.bufsize = cmd.getOptionValue("b") == null ? 1024 : Integer.parseInt(cmd.getOptionValue("b"));
+        try{
+            this.port = cmd.getOptionValue("p") == null ? 4950 : Integer.parseInt(cmd.getOptionValue("p"));
+        }catch(NumberFormatException e){
+            LOG.debug(e.getMessage());
+        }
+        try{
+            this.bufsize = cmd.getOptionValue("b") == null ? 1024 : Integer.parseInt(cmd.getOptionValue("b"));
+        }catch(NumberFormatException e){
+            LOG.debug(e.getMessage());
+        }
         this.ip = cmd.getOptionValue("i") == null ? "0.0.0.0" : cmd.getOptionValue("i");
-        this.mtr = cmd.getOptionValue("t") == null ? 1 : Integer.parseInt(cmd.getOptionValue("t"));
-        this.seconds = cmd.getOptionValue("s") == null ? 1 : Integer.parseInt(cmd.getOptionValue("s"));  // Elvis has just left the building
+        try{
+            this.mtr = cmd.getOptionValue("t") == null ? 1 : Integer.parseInt(cmd.getOptionValue("t"));
+        }catch(NumberFormatException e){
+            LOG.debug(e.getMessage());
+        }
+        try{
+            this.seconds = cmd.getOptionValue("s") == null ? 1 : Integer.parseInt(cmd.getOptionValue("s"));  // Elvis has just left the building
+        }catch(NumberFormatException e){
+            LOG.debug(e.getMessage());
+        }
 
         LOG.debug("initialized: " + this);
     }
