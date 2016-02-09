@@ -1,11 +1,14 @@
 package se.jherrlin;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.*;
 
 import org.apache.commons.cli.*;
 
-public class Server extends Host {
+public class Server extends Host{
 
     byte[] buf;
 
@@ -15,47 +18,17 @@ public class Server extends Host {
     }
 
     @Override
-    public void run(){
+    public void run() {
 
-        DatagramSocket socket = null;
-        try {
-            socket = new DatagramSocket(null);
-        } catch (SocketException e) {
+        try{
+            InetAddress inetAddress = InetAddress.getByName(this.ip);
+            ServerSocket serverSocket = new ServerSocket(this.port, 5, inetAddress);
+            serverSocket.setReuseAddress(true);
+            Socket clientSocket = serverSocket.accept();
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        SocketAddress localBindPoint = new InetSocketAddress(this.port);
-
-        try {
-            socket.bind(localBindPoint);
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
-
-        while (true){
-            DatagramPacket receivePacket = new DatagramPacket(buf, buf.length);
-
-            try {
-                socket.receive(receivePacket);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            DatagramPacket sendPacket = new DatagramPacket(
-                    receivePacket.getData(),
-                    receivePacket.getLength(),
-                    receivePacket.getAddress(),
-                    receivePacket.getPort()
-            );
-
-            try {
-                socket.send(sendPacket);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.printf("UDP echo request from %s", receivePacket.getAddress().getHostAddress());
-            System.out.printf(" using port %d\n", receivePacket.getPort());
         }
     }
 }
