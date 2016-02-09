@@ -1,10 +1,7 @@
 package se.jherrlin;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
+import java.net.*;
 
 import org.apache.commons.cli.*;
 
@@ -18,18 +15,31 @@ public class Server extends Host {
     }
 
     @Override
-    public void run() throws IOException{
+    public void run(){
 
-        DatagramSocket socket = new DatagramSocket(null);
+        DatagramSocket socket = null;
+        try {
+            socket = new DatagramSocket(null);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
 
         SocketAddress localBindPoint = new InetSocketAddress(this.port);
 
-        socket.bind(localBindPoint);
+        try {
+            socket.bind(localBindPoint);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
 
         while (true){
             DatagramPacket receivePacket = new DatagramPacket(buf, buf.length);
 
-            socket.receive(receivePacket);
+            try {
+                socket.receive(receivePacket);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             DatagramPacket sendPacket = new DatagramPacket(
                     receivePacket.getData(),
@@ -38,7 +48,11 @@ public class Server extends Host {
                     receivePacket.getPort()
             );
 
-            socket.send(sendPacket);
+            try {
+                socket.send(sendPacket);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             System.out.printf("UDP echo request from %s", receivePacket.getAddress().getHostAddress());
             System.out.printf(" using port %d\n", receivePacket.getPort());

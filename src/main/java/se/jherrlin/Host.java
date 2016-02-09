@@ -26,7 +26,7 @@ public abstract class Host{
         LOG.debug("initialized: " + this);
     }
 
-    public static void run() throws UnsupportedOperationException {
+    public void run() throws UnsupportedOperationException {
         // Override this method
         throw new UnsupportedOperationException();
     }
@@ -46,6 +46,14 @@ public abstract class Host{
             return false;
         }
         return true;
+    }
+
+    public void sleep(){
+        try{
+            Thread.sleep(1000/this.mtr);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
