@@ -28,8 +28,12 @@ categories: lecture5
 
 ### DNS Caching
 
+* TTL, how long time servers should hold DNS records.
+* If you have a DNS provider, you can check this settings there. (Binero)
+*
 
-### DNS REsource Records
+
+### DNS Resource Records
 
 * A
 * AAAA, IPv6
@@ -38,6 +42,40 @@ categories: lecture5
 * NS
 
 ### DNS Protocol
+
+DNS packet
+
+* 16bit for query, reply to query uses same
+* Flags:
+  * Query or reply
+  * Recursion desired
+  * Recursion available
+  * Reply is authoritative
+
+{% highlight bash %}
+|-------------------+----------------|
+| Identification    | Flags          |
+|-------------------+----------------|
+| Number of         | Number of      |
+| questions         | answers RRs    |
+|-------------------+----------------|
+| Number of         | Number of      |
+| authority RRs     | additional RRs |
+|-------------------+----------------|
+|  Questions                         |
+|  (variable number of questions)    |
+|------------------------------------|
+|  Answers                           |
+|  (variable number of questions)    |
+|------------------------------------|
+|  Authority                         |
+|  (variable number of questions)    |
+|------------------------------------|
+|  Additional information            |
+|  (variable number of questions)    |
+|------------------------------------|
+{% endhighlight %}
+
 
 * Works in Application Layer
 * Based on UDP

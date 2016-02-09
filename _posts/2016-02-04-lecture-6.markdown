@@ -1,0 +1,128 @@
+---
+layout: post
+title:  "Lecture 6"
+date:   2016-02-04 10:15:29 +0100
+categories: lecture6
+---
+
+
+### Python
+
+{% highlight python %}
+
+import socket
+
+socket.gethostbyname('mymoodle.lnu.se')
+
+{% endhighlight %}
+
+
+## ARP
+
+Give me your ip address
+
+* Broadcasting, shouts out to the network, -give me your ip adresses
+* Caching, 
+* Soft state
+
+{% highlight bash %}
+
+arp -a
+
+{% endhighlight %}
+
+
+### ICMP
+
+
+### NAT, Network Address Translation
+
+* IPv6, no NAT, end-to-end connections for all devices. 128-bit addresses.
+* IPv4, 2*32 addresses, 4.4 billion address
+* We have run out of IPv4 addresses.
+* We find new ways to handle this, by NAT for example
+* IPv6, IPsec
+* Ignore IPv5, some kind of streaming protocol.
+
+### IPv6
+* 128 Bits long addresing
+* xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx
+* Written as groups of 2B, four hex
+* Leading zeros may be dropped
+* If ...::... then assume that ist 0 between the ::
+* No need for NAT, all devices can be addressed
+*
+
+![ipv6addressimg](https://teknikpappan.files.wordpress.com/2011/07/ipv6.jpg)
+
+* Unicast
+  * Identify a specific host accress the internet
+  * Globally routable
+  * Highest order bits are 001
+* Multicast
+  * Deliver to an entire group of hosts
+* Anycast
+  * Deliver to any one of a group of hosts
+  * Only cares about one response
+  * Deliverd to all machines, but needs one response
+
+### IPv6 multicast addresses
+
+![multicastipv6addresses](http://www.cisco.com/c/dam/en/us/td/i/000001-100000/90001-95000/92001-93000/92617.ps/_jcr_content/renditions/92617.jpg)
+
+### Link-layer protocols
+
+[NPD, Wikipedia](https://en.wikipedia.org/wiki/Neighbor_Discovery_Protocol)
+
+* DHCP, ARP, ..., is integrated into IPv6
+* NDP, Neighbor Discovery Protocol
+  * Used to discover other hosts and routers on a local network
+  * Incerporates many features from older link-layer protocols
+
+
+### Special addresses used by NDP
+
+
+
+* All host multicast
+  * FF02::1
+* All router multicast
+  * FF02::2
+
+### Neigbor solicitation
+
+* NS message, ICMPv6 (type 135)
+* IPv6 addresses
+  * Source, unspecified (zeros)
+
+### IPv6 headers
+
+![ipv6header](http://www.cisco.com/en/US/technologies/tk648/tk872/images/technologies_white_paper0900aecd8054d37d-03.jpg)
+
+* IPv6 header size: 40B
+
+IPv4 vs IPv6:
+* Designed primarily to speed up routing.
+* No checksum.
+* No fragmentation.
+* TTL name change to reflect "hop count".
+
+#### Optional headers
+
+![nextheaderoptional](http://www.zytrax.com/images/ipv6_headers.gif)
+
+* "Next header" can point to another header
+* This other header can include authentication details
+
+
+
+## HTTP Protocol
+
+* URI, Uniform Resource Identifier
+* HTML, HyperText Markup Language
+* HTTP, HyperText Transfer Protocol
+  * Client-server protocol for transferring recources
+  * Client sends request and server sends response
+
+* Important properties:
+  *
