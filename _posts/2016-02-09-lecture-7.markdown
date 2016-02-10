@@ -1,0 +1,36 @@
+---
+layout: post
+title:  "Lecture 7, Signal and communication"
+date:   2016-02-09 15:15:29 +0100
+categories: lecture7
+---
+
+## Transmission media
+
+Waves are guided along solig medium
+
+* **Twisted pair**
+* Coaxial cable
+* Optical fiber
+
+## Twister pair(TP)
+
+![tpcable](http://www.infocellar.com/networks/ethernet/files/twisted-pair.jpg)
+
+* Cheap medium, commonly user for communication within building and in telephone networks
+* Cables may hold hundreds of pairs.
+
+* Twisting reduces interference
+* Half the radiation
+* Shield the cable to reduce interferance
+* STP (Sheilder twisted pair)
+* UTP (Unshield twisted pair)
+
+
+## Optical fiber
+
+
+
+{% highlight bash %}
+hejsan
+{% endhighlight %}
