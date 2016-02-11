@@ -16,15 +16,12 @@ public class Client extends Host {
     }
 
     public void run(){
-
         for (int j = 0; j < this.seconds; j++) {
-
             for (int i = 0; i < this.mtr; i++) {
                 send();
                 sleep();
             }
         }
-
     }
 
     public void send(){

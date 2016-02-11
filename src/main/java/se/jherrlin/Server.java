@@ -21,12 +21,14 @@ public class Server extends Host{
     public void run() {
 
         try{
-            InetAddress inetAddress = InetAddress.getByName(this.ip);
-            ServerSocket serverSocket = new ServerSocket(this.port, 5, inetAddress);
+            InetAddress address = InetAddress.getByName(this.ip);
+            ServerSocket serverSocket = new ServerSocket(this.port, 5, address);
             serverSocket.setReuseAddress(true);
             Socket clientSocket = serverSocket.accept();
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            BufferedReader in = new BufferedReader(
+                new InputStreamReader(clientSocket.getInputStream())
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
