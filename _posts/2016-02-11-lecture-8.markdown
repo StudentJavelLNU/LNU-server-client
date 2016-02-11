@@ -1,0 +1,22 @@
+---
+layout: post
+title:  "Lecture 8"
+date:   2016-02-11 10:15:29 +0100
+categories: lecture8
+---
+
+## Multiplexing
+
+* Fundamental to networking
+* General concept
+* Used in:
+  * Lowest level of transmission systems
+  * Higher lelevs of network hardware
+  * Protocol software
+  * Applications
+
+### Muliplexor
+
+
+### Demultiplexor
+
