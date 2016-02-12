@@ -21,35 +21,56 @@ public class Main
         options.addOption("t", "message-transfer-rate", true, "message time rate ( mtr ). default: 1");
         options.addOption("s", "seconds", true, "how long to run on client. default: 1");
 
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = parser.parse(options, args);
+        CommandLine cmd = null;
 
-        if (cmd.hasOption("m")){
-            if (cmd.getOptionValue("m").equals("server")){
-                server = new Server(cmd);
-                if (server.valid()){
-                    server.run();
+        try{
+            CommandLineParser parser = new DefaultParser();
+            cmd = parser.parse(options, args);
+        }
+        catch (UnrecognizedOptionException e){
+            System.err.println("Unrecognized option");
+            help(options);
+        }
+        catch (MissingArgumentException e){
+            System.err.println("Missign arguments options");
+            help(options);
+        }
+        try{
+            if (cmd.hasOption("m")){
+
+                if (cmd.getOptionValue("m").equals("server")){
+                    server = new Server(cmd);
+                    if (server.valid()){
+                        server.run();
+                    }
+                    else {
+                        help(options);
+                    }
+                }
+                else if (cmd.getOptionValue("m").equals("client")){
+                    client = new Client(cmd);
+                    if (client.valid()){
+                        client.run();
+                    }
+                    else {
+                        help(options);
+                    }
                 }
                 else {
                     help(options);
                 }
-            }
-            else if (cmd.getOptionValue("m").equals("client")){
-                client = new Client(cmd);
-                if (client.valid()){
-                    client.run();
-                }
-                else {
-                    help(options);
-                }
+
             }
             else {
                 help(options);
             }
+
         }
-        else {
+        catch (NullPointerException e){
+            System.err.println("Missign arguments options");
             help(options);
         }
+
     }
 
     private static void help(Options options){

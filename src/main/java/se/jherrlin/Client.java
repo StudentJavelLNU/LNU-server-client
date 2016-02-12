@@ -16,15 +16,20 @@ public class Client extends Host {
     }
 
     public void run(){
+        // If mtr is 0, send only once.
+        if (this.mtr == 0){ send(); }
+        
+        else{
+            // how many seconds to send
+            for (int j = 0; j < this.seconds; j++) {
 
-        for (int j = 0; j < this.seconds; j++) {
-
-            for (int i = 0; i < this.mtr; i++) {
-                send();
-                sleep();
+                // how many messages per second
+                for (int i = 0; i < this.mtr; i++) {
+                    send();
+                    sleep();
+                }
             }
         }
-
     }
 
     public void send(){

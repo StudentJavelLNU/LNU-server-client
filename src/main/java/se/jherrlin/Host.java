@@ -51,14 +51,22 @@ public abstract class Host{
         // IP address
         InetAddressValidator inetAddressValidator = new InetAddressValidator();
         if (!inetAddressValidator.isValid(this.ip)){
-            System.out.println("\n--- ERROR ---");
-            System.out.printf("%s is not a valid IPv4 address\n\n", this.ip);
+            LOG.debug("ip is not a valid IPv4 address");
             return false;
         }
         // Port
         if (this.port > 65535 || this.port < 1 ){
-            System.out.println("\n--- ERROR ---");
-            System.out.printf("%s is not in the valid port range(1-65535)\n\n", this.port);
+            LOG.debug("port is not in the valid port range(1-65535)");
+            return false;
+        }
+        // Mtr, Message Transfer Rate
+        if (this.mtr < 0){
+            LOG.debug("mtr value cant be below 0.");
+            return false;
+        }
+        // Seconds
+        if (this.seconds < 1){
+            LOG.debug("seconds cant be below 1 second.");
             return false;
         }
         return true;
@@ -66,6 +74,7 @@ public abstract class Host{
 
     public void sleep(){
         try{
+            // split one second with the mtr
             Thread.sleep(1000/this.mtr);
         } catch (InterruptedException e) {
             e.printStackTrace();
