@@ -7,29 +7,27 @@ package se.jherrlin;
 import java.io.*;
 import java.net.*;
 
-import se.jherrlin.Utils.*;
-
 public class Client{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        try{
-            Socket socket = new Socket("localhost", 65000);
+        Socket socket = new Socket("localhost", 65001);
 
-            DataOutputStream outToServer = new DataOutputStream( socket.getOutputStream() );
-            outToServer.writeBytes("Herro server!\n");
-            socket.close();
+        DataOutputStream outToServer = new DataOutputStream( socket.getOutputStream() );
+        DataInputStream inputStream = new DataInputStream( socket.getInputStream() );
+        byte[] buf;
+        outToServer.writeBytes("Herro server!");
 
+        Thread.sleep(200);
+
+        do {
+            buf = new byte[512];
+            inputStream.read(buf);
         }
-        catch (UnknownHostException e){
-            e.printStackTrace();
-            System.out.println("Shuting down");
-            System.exit(1);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-            System.out.println("Shuting down");
-            System.exit(1);
-        }
+        while (inputStream.available() != 0);
+
+
+        System.out.println("Server responded with: "+new String(buf));
+        socket.close();
 
     }
 }
