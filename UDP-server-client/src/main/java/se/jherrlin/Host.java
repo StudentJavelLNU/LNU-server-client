@@ -6,12 +6,12 @@ import org.apache.log4j.Logger;
 
 public abstract class Host{
 
-    String mode;
-    int port;
-    int bufsize;
-    int mtr;
-    int seconds;
-    String ip;
+    public String mode;
+    public int port;
+    public int bufsize;
+    public int mtr;
+    public int seconds;
+    public String ip;
 
     final Logger LOG = Logger.getLogger(this.getClass().getSimpleName());
 
