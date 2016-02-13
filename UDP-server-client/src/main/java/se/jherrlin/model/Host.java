@@ -3,6 +3,7 @@ package se.jherrlin.model;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.validator.routines.InetAddressValidator;
 import org.apache.log4j.Logger;
+import se.jherrlin.utils.Utils;
 
 public abstract class Host {
 
@@ -12,6 +13,8 @@ public abstract class Host {
     public int mtr;
     public int seconds;
     public String ip;
+    public String message;
+    public Utils utils = new Utils();
 
     final Logger LOG = Logger.getLogger(this.getClass().getSimpleName());
 
@@ -28,6 +31,7 @@ public abstract class Host {
             LOG.debug(e.getMessage());
         }
         this.ip = cmd.getOptionValue("i") == null ? "0.0.0.0" : cmd.getOptionValue("i");
+        this.message = cmd.getOptionValue("x") == null ? "herro" : cmd.getOptionValue("x");
         try{
             this.mtr = cmd.getOptionValue("t") == null ? 1 : Integer.parseInt(cmd.getOptionValue("t"));
         }catch(NumberFormatException e){
@@ -42,7 +46,7 @@ public abstract class Host {
         LOG.debug("initialized: " + this);
     }
 
-    public void run() throws UnsupportedOperationException {
+    public void run() throws Exception {
         // Override this method
         throw new UnsupportedOperationException();
     }
