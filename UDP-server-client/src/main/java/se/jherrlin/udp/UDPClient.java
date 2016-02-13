@@ -6,12 +6,12 @@ import se.jherrlin.Host;
 import java.io.IOException;
 import java.net.*;
 
-public class Client extends Host {
+public class UDPClient extends Host {
 
     byte[] buf;
     private static String MSG = "An echo message!";
 
-    public Client(CommandLine cmd) {
+    public UDPClient(CommandLine cmd) {
         super(cmd);
         buf = new byte[this.bufsize];
     }

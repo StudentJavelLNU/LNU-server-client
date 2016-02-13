@@ -1,15 +1,16 @@
-package se.jherrlin;
+package se.jherrlin.udp;
+
+import org.apache.commons.cli.CommandLine;
+import se.jherrlin.Host;
 
 import java.io.IOException;
 import java.net.*;
 
-import org.apache.commons.cli.*;
-
-public class Server extends Host {
+public class UDPServer extends Host {
 
     byte[] buf;
 
-    public Server(CommandLine cmd) throws IOException {
+    public UDPServer(CommandLine cmd) throws IOException {
         super(cmd);
         buf = new byte[this.bufsize];
     }

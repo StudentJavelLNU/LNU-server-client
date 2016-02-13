@@ -1,13 +1,15 @@
 package se.jherrlin;
 
 import org.apache.commons.cli.*;
+import se.jherrlin.udp.UDPClient;
+import se.jherrlin.udp.UDPServer;
 
 import java.io.IOException;
 
 public class Main
 {
-    public static Server server;
-    public static Client client;
+    public static UDPServer udpserver;
+    public static UDPClient udpclient;
 
     public static void main( String[] args ) throws ParseException,IOException {
 
@@ -39,18 +41,18 @@ public class Main
             if (cmd.hasOption("m")){
 
                 if (cmd.getOptionValue("m").equals("server")){
-                    server = new Server(cmd);
-                    if (server.valid()){
-                        server.run();
+                    udpserver = new UDPServer(cmd);
+                    if (udpserver.valid()){
+                        udpserver.run();
                     }
                     else {
                         help(options);
                     }
                 }
                 else if (cmd.getOptionValue("m").equals("client")){
-                    client = new Client(cmd);
-                    if (client.valid()){
-                        client.run();
+                    udpclient = new UDPClient(cmd);
+                    if (udpclient.valid()){
+                        udpclient.run();
                     }
                     else {
                         help(options);
