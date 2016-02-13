@@ -1,10 +1,12 @@
 package se.jherrlin.udp;
 
-import org.apache.commons.cli.CommandLine;
-import se.jherrlin.Host;
-
 import java.io.IOException;
 import java.net.*;
+
+import org.apache.commons.cli.CommandLine;
+
+import se.jherrlin.model.Host;
+
 
 public class UDPServer extends Host {
 
