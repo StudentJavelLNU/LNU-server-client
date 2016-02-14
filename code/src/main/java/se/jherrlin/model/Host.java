@@ -26,29 +26,17 @@ public abstract class Host {
         // Commandline arguments comes in.
         // Validation and/or default values are set
         this.mode = cmd.getOptionValue("m");
-        try{
-            this.port = cmd.getOptionValue("p") == null ? 4950 : Integer.parseInt(cmd.getOptionValue("p"));
-        }catch(NumberFormatException e){
-            LOG.debug(e.getMessage());
-        }
-        try{
-            this.bufsize = cmd.getOptionValue("b") == null ? 1024 : Integer.parseInt(cmd.getOptionValue("b"));
-        }catch(NumberFormatException e){
-            LOG.debug(e.getMessage());
-        }
         this.ip = cmd.getOptionValue("i") == null ? "0.0.0.0" : cmd.getOptionValue("i");
         this.message = cmd.getOptionValue("x") == null ? "herro" : cmd.getOptionValue("x");
+
         try{
+            this.port = cmd.getOptionValue("p") == null ? 4950 : Integer.parseInt(cmd.getOptionValue("p"));
+            this.bufsize = cmd.getOptionValue("b") == null ? 1024 : Integer.parseInt(cmd.getOptionValue("b"));
             this.mtr = cmd.getOptionValue("t") == null ? 1 : Integer.parseInt(cmd.getOptionValue("t"));
-        }catch(NumberFormatException e){
-            LOG.debug(e.getMessage());
-        }
-        try{
             this.seconds = cmd.getOptionValue("s") == null ? 1 : Integer.parseInt(cmd.getOptionValue("s"));  // Elvis has just left the building
         }catch(NumberFormatException e){
             LOG.debug(e.getMessage());
         }
-
         LOG.debug("initialized: " + this);
     }
 
@@ -80,6 +68,7 @@ public abstract class Host {
             LOG.debug("seconds cant be below 1 second.");
             return false;
         }
+        
         return true;
     }
 
