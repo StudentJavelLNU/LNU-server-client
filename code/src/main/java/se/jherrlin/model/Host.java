@@ -23,6 +23,8 @@ public abstract class Host {
     final Logger LOG = Logger.getLogger(this.getClass().getSimpleName());
 
     public Host(CommandLine cmd) {
+        // Commandline arguments comes in.
+        // Validation and/or default values are set
         this.mode = cmd.getOptionValue("m");
         try{
             this.port = cmd.getOptionValue("p") == null ? 4950 : Integer.parseInt(cmd.getOptionValue("p"));
@@ -92,6 +94,7 @@ public abstract class Host {
 
     @Override
     public String toString() {
+        // print format to the log
         return this.getClass().getName()+": { " +
                 "mode: " + mode + ", " +
                 "port: " + port + ", " +

@@ -19,6 +19,7 @@ public class Main
 
         Options options = new Options();
 
+        // commandline arguments
         options.addOption("h", "help", false, "show help.");
         options.addOption("m", "mode", true, "{ udpserver | udpclient | tcpserver | tcpclient }");
         options.addOption("p", "port", true, "port number. default: 4950");
@@ -43,6 +44,7 @@ public class Main
             help(options);
         }
         try{
+            // check what -m option is set
             if (cmd.hasOption("m")){
 
                 if (cmd.getOptionValue("m").equals("udpserver")){
@@ -114,6 +116,7 @@ public class Main
     }
 
     private static void help(Options options){
+        // good looking helper
         HelpFormatter helpFormatter = new HelpFormatter();
         helpFormatter.printHelp("Network Application", options);
     }
