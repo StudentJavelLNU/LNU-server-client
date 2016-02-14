@@ -171,6 +171,30 @@ of the hosts by inheritence, see ~\ref{sec:task2}.
 	\caption{Send 5 UDP package in 1 sec}
 \end{figure}
 
+\subsection{Exceptions}
+
+This is the exceptions that are handled in the commandline input workflow.
+
+\begin{description}
+  \item[NumberFormatException] \hfill \\
+    When we want a number but gets something else
+  \item[NullPointerException] \hfill \\
+    When flag is given but no argument
+  \item[UnrecognizedOptionException] \hfill \\
+    When option is not known
+  \item[MissingArgumentException] \hfill \\
+    When flag is given but no argument
+  \item[IP address] \hfill \\
+    Make sure the IP address is valid
+  \item[Port number] \hfill \\
+    Make sure the port number is in the range
+  \item[Message Transfer Rate] \hfill \\
+    Not negative
+  \item[Seconds ] \hfill \\
+    Not below 0
+
+\end{description}
+
 
 \subsection{VG-tasks}
 
