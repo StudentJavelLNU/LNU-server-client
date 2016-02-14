@@ -20,7 +20,7 @@ public class Client{
         Thread.sleep(200);
 
         do {
-            buf = new byte[512];
+            buf = new byte[256];
             inputStream.read(buf);
         }
         while (inputStream.available() != 0);
