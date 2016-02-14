@@ -43,6 +43,7 @@ public class TCPClient extends Host{
         byte[] buf;
         outToServer.writeBytes(this.message);
 
+        // Wait for data to arrive to inputStream
         Thread.sleep(200);
 
         String message = "";

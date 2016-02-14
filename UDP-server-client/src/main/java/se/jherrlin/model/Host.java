@@ -3,9 +3,13 @@ package se.jherrlin.model;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.validator.routines.InetAddressValidator;
 import org.apache.log4j.Logger;
+
 import se.jherrlin.utils.Utils;
 
 public abstract class Host {
+
+    // This class takes care of passing command line arguments
+    // and validating the host attributes
 
     public String mode;
     public int port;
@@ -48,6 +52,7 @@ public abstract class Host {
 
     public void run() throws Exception {
         // Override this method
+        // with specific host logic
         throw new UnsupportedOperationException();
     }
 

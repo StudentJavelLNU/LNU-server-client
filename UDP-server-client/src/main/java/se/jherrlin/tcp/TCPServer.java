@@ -1,15 +1,15 @@
 package se.jherrlin.tcp;
 
 /**
- * Created by nils on 2/12/16.
+ * Created by John Herrlin on 2/12/16.
  */
-
-import org.apache.commons.cli.CommandLine;
-import se.jherrlin.model.Host;
 
 import java.io.*;
 import java.net.*;
-import java.util.Arrays;
+
+import org.apache.commons.cli.CommandLine;
+
+import se.jherrlin.model.Host;
 
 public class TCPServer extends Host{
 
@@ -25,9 +25,13 @@ public class TCPServer extends Host{
         ServerSocket serverSocket = new ServerSocket(this.port);
 
         while(true) {
+            // Accept client when it tries to connect
             Socket socket = serverSocket.accept();
+            // Pass the socket to the new ServerThread instance
+            // ServerThread will take care or the rest
             ServerThread serverThread = new ServerThread(socket, this.bufsize);
             serverThread.start();
+            // Go back to waiting for a client to connect
         }
     }
 }
@@ -52,8 +56,10 @@ class ServerThread extends Thread {
             inputStream = new DataInputStream(this.socket.getInputStream());
             outputStream = new DataOutputStream(this.socket.getOutputStream());
 
+            // Wait for data to arrive in the inputStream
             Thread.sleep(200);
 
+            // message from client
             String message = "";
 
             do {
