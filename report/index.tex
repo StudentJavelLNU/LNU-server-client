@@ -160,9 +160,9 @@ Two Docker containers is set up, 172.17.0.2 and 172.17.0.3.
 
 To handle commandline arguments i used Apache Commons CLI lib.
 This provides some good features for handeling cli inputs.
-I had to write some exception handling then types didnt match.
-All of this is done in the abstract class Host and i applied to all
-of the hosts.
+I had to write some exception handling when types didnt match.
+All of this is done in the abstract class Host and is then applied to all
+of the hosts by inheritence, see ~\ref{sec:task2}.
 
 \begin{figure}[H]
     \centering  
@@ -181,7 +181,7 @@ Clairification on vg-tasks.
 Not implemented
 
 \subsubsection{Task 2}
-
+\label{sec:task2}
 In the implementation there is a abstract class called Host.
 All of the hosts (UDPServer, UDPClient, TCPServer, TCPClient) extends Host.
 Host gives functionallity to validate that all input parameters are correct.
@@ -191,7 +191,7 @@ the specific logic for the specific host.
 \clearpage
 
 \section{Assignment 1.3}
-
+\label{sec:assignment13}
 In ~\ref{fig:assignment13} there is a screenshot of 4 clients creating TCP connections to 
 the server.
 
@@ -206,9 +206,9 @@ the server.
 
 \subsection{TCP server with small bufsize}
 
-In ~\ref{fig:assignment13tcp} there is a screenshot is a TCP server with a buffer size of 5.
+In ~\ref{fig:assignment13tcp} there is a screenshot of an TCP server with a buffer size of 5.
 The client is sending a message with a size of 10. The server is handling this in a good way and assembles the stream.
-And returning a message that is the size of 10.
+Returning a message that is the size of 10.
 
 \begin{figure}[H]
     \centering  
@@ -219,7 +219,7 @@ And returning a message that is the size of 10.
 
 \subsection{UDP server with small bufsize}
 
-In ~\ref{fig:assignment13udp} there is a screenshot is a UDP server with a buffer size of 5.
+In ~\ref{fig:assignment13udp} there is a screenshot of an UDP server with a buffer size of 5.
 The client is sendning a message with a size of 10.
 The UDP is not handeling this good, it cuts the message and sends back half the message to the client.
 
@@ -235,7 +235,7 @@ The UDP is not handeling this good, it cuts the message and sends back half the 
 
 The reason that TCP server is handeling this in a good way it that is uses a stream.
 It can be refered to open a file and read or write a steam. 
-In UDP we just get a package and nothing more, is we dont take care of the package 
+In UDP we just get a package and nothing more, if we dont take care of the package 
 UDP wont help us doing it.
 
 
