@@ -1,9 +1,4 @@
 
-## Assignments
-
-* [Assignment 1.1](https://github.com/jherrlin/Computer-Networks-1DV701/blob/master/images/assignment1.1.png)
-* [Assignment 1.2](https://github.com/jherrlin/Computer-Networks-1DV701/tree/v1.2)
-
 ## Requirements
 
 * Java
@@ -11,20 +6,16 @@
 
 ## Usage
 
-Get commandline options
+Package
 
 ```shell
-java -jar networking-1.0-SNAPSHOT.one-jar.jar
+mvn package
 ```
 
-Start server
+Run applications and print options
+
 
 ```shell
-java -jar networking-1.0-SNAPSHOT.one-jar.jar -m server
+java -jar target/networking-1.0-SNAPSHOT.one-jar.jar
 ```
 
-Start client
-
-```shell
-java -jar networking-1.0-SNAPSHOT.one-jar.jar -m client
-```  
