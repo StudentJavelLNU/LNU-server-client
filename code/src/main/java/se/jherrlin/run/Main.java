@@ -1,4 +1,4 @@
-package se.jherrlin;
+package se.jherrlin.run;
 
 import java.io.IOException;
 
