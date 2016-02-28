@@ -167,8 +167,8 @@ starting with a request and ending with a response being sent back.
   \item If the requested uri matches a pattern, the URL handler will call the corresponding View, forward the request as an argument
   \item Depending on the called view, proper business logic will be executed. Thereon a response and body will be sent back to the client
 \end{enumerate}
-\\
-By following this model, adding new URLs and a corresponding View for that URL is extremely easy.
+
+By following this model, adding new URLs and a corresponding View for that URL is extremely easy.\\
 
 \section{Problem 1}
 
@@ -196,36 +196,130 @@ By following this model, adding new URLs and a corresponding View for that URL i
 \end{figure}
 
 
-
 \section{Problem 2}
 
 The table in ~\ref{fig:responsecodesandusage} describes different types of response codes that the server sends back to the client.
 We table describes response codes that are both in the G task in Problem 1 and VG-task 1 in Problem 2.
 The reason to have everything in one table and not to split them up if for the simplicity and readability.
+Almost all of the response codes have figures and links to them are in the table.
+
+\subsection{403}
+
+We get this behavior when we try to post or put a form without being logged in.
+Login is done via the endpoint: /login.
 
 \begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.6]{img/screenshots/postnotallowed.png}
+	\label{fig:postnotallowed}
+	\caption{POST not allowed.}
+\end{figure}
 
+\subsection{404}
+
+We get this behavior when we trying to access a endpoint that doesnt have any content.
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.6]{img/screenshots/notfound.png}
+	\label{fig:notfound}
+	\caption{404 Not Found.}
+\end{figure}
+
+\subsection{500}
+
+This behavior it hard to get from a web broser as is sends correct requests.
+It appers if the server cant parse the request in a correct way it returns 500 Server Error.
+A screenshot of a telnet caption can be found here, Figure~\ref{fig:response500servererror}
+
+
+\subsection{VG-Task 1}
+
+All responsecodes thats implemented can be found in Figure~\ref{fig:responsecodesandusage}
+
+
+\subsection{VG-Task 2}
+
+Both POST and PUT sends data to the server but are used in two different way.
+PUT is used to update a resource on a specific endpoint.
+In our server implementation we send data to /put/\{blog-uuid\}. The blog-uuid is the specific endoint where the resource should be updated.
+POST is also connected to a endpoint, but doesnt need to have a specific location.
+For example login, send data to the /login endpoint. The endpoint takes care of the data in the request, but we dont need to specify a specific id.
+In out implementation we send data to /post to create a new blog  post.
+The important part is that PUT should have a unique id for the resource and not POST.\\
+
+\subsubsection{List all blog posts}
+
+This endpoint lists all of the blog posts that we have in the db.
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.3]{img/screenshots/allblogposts.png}
+	\label{fig:allblogposts}
+	\caption{Method: GET, Endpoint: /blog, Comment: All blog posts in db.}
+\end{figure}
+
+
+\subsubsection{Create blog posts}
+
+This endpoints provides a form for creating a new blog post.
+When submiting the form the data is send to the /post endpoint and the form data in the request
+body. The request method is POST.
+The server parses the data and stores it in the db.
+If the submit is correct the server sends back a document that redirect us to the /blog endpoint.
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.6]{img/screenshots/createblogpost.png}
+	\label{fig:updateblogpost}
+	\caption{Method: GET, Endpoint: /form.html, Comment: Create blog post.}
+\end{figure}
+
+
+\subsubsection{Update blog posts}
+
+From this endpoint we can edit all of the blog posts.
+The update is made with a PUT request to the endpoint /put/{blog-uuid}.
+The server checks if we have a field in the form called \_method with the value put.
+If the server finds that is sets the request as a PUT.
+The server then tries to parse the data and update the blog entry by its uuid.
+Response is a html document that redirects the user to the /blog endpoint.
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.4]{img/screenshots/updateblogpost.png}
+	\label{fig:updateblogpost}
+	\caption{Method: GET, Endpoint: /blog/edit, Comment: Update blog posts.}
+\end{figure}
+
+
+\section{Problem 3}
+
+Requesting a image from a URI within telnet gives back the compiled code of the image.
+
+\begin{figure}[H]
+  \centering
   \begin{tabular}{ | l | l | }
     \hline			
     Code & Usage \\
     \hline			
-    200 & OK, Many places where server handles response in a correct way. \\
+    200 & Many places where server handles response in a correct way. \\
     \hline			
-    201 & Created, When success with POST on /post Figure~\ref{fig:response201created} \\
+    201 & When success with POST on /post Figure~\ref{fig:response201created} \\
     \hline			
-    202 & Accepted, When /login success Figure~\ref{fig:response202login} \\
+    202 & When /login success Figure~\ref{fig:response202login} \\
     \hline			
-    205 & Reset Content, When /logout success. Figure~\ref{fig:response205logout} \\
+    205 & When /logout success. Figure~\ref{fig:response205logout} \\
     \hline			
-    400 & Bad Request, When NOT PUT on /put . Figure~\ref{fig:response400put} \\
+    400 & When not PUT on /put . Figure~\ref{fig:response400put} \\
     \hline			
-    403 & Forbidden, When trying trying /post or /put but have not logged in (/login) before Figure~\ref{fig:response403forbidden} \\
+    403 & When trying /post or /put before logged in (/login) before Figure~\ref{fig:response403forbidden} \\
     \hline			
-    404 & Not Found, When trying to access a static file but cant find it OR if url doesn match any Figure~\ref{fig:response404notfound} \\
+    404 & When static file not found OR if url doesn match any Figure~\ref{fig:response404notfound} \\
     \hline			
-    405 & Method Not Allowed, When NOT POST on /post Figure~\ref{fig:response405methodnotallowed} \\
+    405 & When not POST on /post Figure~\ref{fig:response405methodnotallowed} \\
     \hline			
-    500 & Server Error, If we cant parse the request Figure~\ref{fig:response500servererror} \\
+    500 & If we cant parse the request Figure~\ref{fig:response500servererror} \\
     \hline  
   \end{tabular}
   \label{fig:responsecodesandusage}
@@ -234,7 +328,6 @@ The reason to have everything in one table and not to split them up if for the s
 
 \section{Screenshots}
 
-hey 
 
 \begin{figure}[H]
     \centering  
@@ -243,7 +336,6 @@ hey
 	\caption{Method: GET, Endpoint: /logout, Response: 205 Reset Content}
 \end{figure}
 
-hey 
 
 \begin{figure}[H]
     \centering  
@@ -252,7 +344,6 @@ hey
 	\caption{Method: GET, Endpoint: /login, Response: 202 Accepted}
 \end{figure}
 
-hey 
 
 \begin{figure}[H]
     \centering  
@@ -261,7 +352,6 @@ hey
 	\caption{Method: GET, Endpoint: /put, Response: 400 Bad Request}
 \end{figure}
 
-hey 
 
 \begin{figure}[H]
     \centering  
@@ -278,6 +368,7 @@ hey
 	\caption{Method: POST, Endpoint: /post, Response: 403 Forbidden}
 \end{figure}
 
+
 \begin{figure}[H]
     \centering  
     \includegraphics[scale=0.70]{img/screenshots/response404notfound.png}
@@ -285,7 +376,6 @@ hey
 	\caption{Method: GET, Endpoint: /static/notfound, Response: 404 Not Found}
 \end{figure}
 
-hejsa
 
 \begin{figure}[H]
     \centering  
@@ -293,6 +383,7 @@ hejsa
 	\label{fig:response405methodnotallowed}
 	\caption{Method: GET, Endpoint: /post, Response: 405 Method Not Allowed}
 \end{figure}
+
 
 \begin{figure}[H]
     \centering  
@@ -304,8 +395,10 @@ hejsa
 
 \section{How To Run/Build}
 
-The application can be run from the TCPserver -> ServerThread class, located in
-the TCP module. The required arguments to run the server is '-m tcpserver'
+Import the project as a maven project in an IDE.
+Download maven dependencies.
+Run se.jherrlin.run.Main with arguments: -m tcpserver\\
+
 
 %------------------------------------------------------------------------------
 %\bibliographystyle{IEEEtran}
