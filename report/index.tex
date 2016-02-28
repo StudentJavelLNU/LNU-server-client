@@ -136,16 +136,66 @@
 % This is where you write the report:
 \section{Introduction}
 
-Code in module db and domain is not code that is accured in the assignment.
-We created a small ORM becase the nature of POST and PUT requests.
 
-Urls
+The idea of our project was to build a small web framework, since we already
+had to write the web server from scratch for the assignment. We figured this
+to be a great opportunity to develop something we could continue working on
+and learn more about since we consider it a very interesting field.\\
+\\
+Our goals with this small framework is to keep things as simple and modular
+as possible, making it easy to expand or modify for further development.\\
+\\
+We are very well aware of the fact that the database parts were not a part
+of the assignment, but to us it simply made sense to include this in the
+project. Therefore, we have built a small ORM with a SQLite database found
+in the db and domain modules. The reason for this was to be able to test and
+use our PUT and POST methods naturally, as if we were performing them on a 
+real life web server.\\
+\\
+We have saved the tcpclient in the code from the previous assignment.
+The reson for this is that we used it for fuzzy testing against the endpoints.\\
 
-In module handlers, we have a class called Urls.
-If we can parse the request we put the request in Urls and we try to match the urls to different regexps.
-If match we send the request to a View class that takes care of business logic.
 
-The application starts in modue tcp, class TCPserver -> ServerThread.
+\subsection{Workflow}
+
+The small enumeration figure below describes the workflow of the webserver,
+starting with a request and ending with a response being sent back.
+
+\begin{enumerate}
+  \item Parse an incoming request and create a Request object
+  \item Send the request object to the URL handler, which will match the Request.uri with specified patterns
+  \item If the requested uri matches a pattern, the URL handler will call the corresponding View, forward the request as an argument
+  \item Depending on the called view, proper business logic will be executed. Thereon a response and body will be sent back to the client
+\end{enumerate}
+\\
+By following this model, adding new URLs and a corresponding View for that URL is extremely easy.
+
+\section{Problem 1}
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.5]{img/screenshots/htmlindex.png}
+	\label{fig:htmlindex}
+	\caption{Index page with imgs and CSS.}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.5]{img/screenshots/filesresourcefolder.png}
+	\label{fig:filesresourcefolder}
+	\caption{Resource folder, site root.}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.6]{img/screenshots/htmlstatic.png}
+	\label{fig:htmlstatic}
+	\caption{HTML document in static folder.}
+\end{figure}
+
+
 
 \section{Problem 2}
 
@@ -154,28 +204,28 @@ We table describes response codes that are both in the G task in Problem 1 and V
 The reason to have everything in one table and not to split them up if for the simplicity and readability.
 
 \begin{figure}[H]
-  \centering  
+
   \begin{tabular}{ | l | l | }
     \hline			
     Code & Usage \\
     \hline			
     200 & OK, Many places where server handles response in a correct way. \\
     \hline			
-    201 & Created, When success with POST on /post \\
+    201 & Created, When success with POST on /post Figure~\ref{fig:response201created} \\
     \hline			
-    202 & Accepted, When /login success \\
+    202 & Accepted, When /login success Figure~\ref{fig:response202login} \\
     \hline			
     205 & Reset Content, When /logout success. Figure~\ref{fig:response205logout} \\
     \hline			
     400 & Bad Request, When NOT PUT on /put . Figure~\ref{fig:response400put} \\
     \hline			
-    403 & Forbidden, When trying trying /post or /put but have not logged in (/login) before \\
+    403 & Forbidden, When trying trying /post or /put but have not logged in (/login) before Figure~\ref{fig:response403forbidden} \\
     \hline			
-    404 & Not Found, When trying to access a static file but cant find it OR if url doesn match any \\
+    404 & Not Found, When trying to access a static file but cant find it OR if url doesn match any Figure~\ref{fig:response404notfound} \\
     \hline			
-    405 & Method Not Allowed, When NOT POST on /post \\
+    405 & Method Not Allowed, When NOT POST on /post Figure~\ref{fig:response405methodnotallowed} \\
     \hline			
-    500 & Server Error, If we cant parse the request \\
+    500 & Server Error, If we cant parse the request Figure~\ref{fig:response500servererror} \\
     \hline  
   \end{tabular}
   \label{fig:responsecodesandusage}
@@ -193,22 +243,69 @@ hey
 	\caption{Method: GET, Endpoint: /logout, Response: 205 Reset Content}
 \end{figure}
 
-\begin{figure}[H]
-    \centering  
-    \includegraphics[scale=0.6]{img/screenshots/response200login.png}
-	\label{fig:response200login}
-	\caption{Method: GET, Endpoint: /login, Response: 200 OK}
-\end{figure}
+hey 
 
 \begin{figure}[H]
     \centering  
-    \includegraphics[scale=0.6]{img/screenshots/response400put.png}
+    \includegraphics[scale=0.6]{img/screenshots/response202login.png}
+	\label{fig:response202login}
+	\caption{Method: GET, Endpoint: /login, Response: 202 Accepted}
+\end{figure}
+
+hey 
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=1]{img/screenshots/response400put.png}
 	\label{fig:response400put}
 	\caption{Method: GET, Endpoint: /put, Response: 400 Bad Request}
 \end{figure}
 
+hey 
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.40]{img/screenshots/response201created.png}
+	\label{fig:response201created}
+	\caption{Method: POST, Endpoint: /post, Response: 201 Created}
+\end{figure}
 
 
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.40]{img/screenshots/response403forbidden.png}
+	\label{fig:response403forbidden}
+	\caption{Method: POST, Endpoint: /post, Response: 403 Forbidden}
+\end{figure}
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.70]{img/screenshots/response404notfound.png}
+	\label{fig:response404notfound}
+	\caption{Method: GET, Endpoint: /static/notfound, Response: 404 Not Found}
+\end{figure}
+
+hejsa
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.70]{img/screenshots/response405methodnotallowed.png}
+	\label{fig:response405methodnotallowed}
+	\caption{Method: GET, Endpoint: /post, Response: 405 Method Not Allowed}
+\end{figure}
+
+\begin{figure}[H]
+    \centering  
+    \includegraphics[scale=0.80]{img/screenshots/response500servererror.png}
+	\label{fig:response500servererror}
+	\caption{Method: ?, Endpoint: ?, Response: 500 Server Error}
+\end{figure}
+
+
+\section{How To Run/Build}
+
+The application can be run from the TCPserver -> ServerThread class, located in
+the TCP module. The required arguments to run the server is '-m tcpserver'
 
 %------------------------------------------------------------------------------
 %\bibliographystyle{IEEEtran}
