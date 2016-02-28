@@ -1,14 +1,12 @@
 package se.jherrlin.handlers;
 
+
+import java.util.regex.Pattern;
+
 import se.jherrlin.model.Request;
 import se.jherrlin.tcp.TCPServer;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-/**
- * Created by nils on 2/22/16.
- */
 public class Urls {
 
     public static void urls(Request request){

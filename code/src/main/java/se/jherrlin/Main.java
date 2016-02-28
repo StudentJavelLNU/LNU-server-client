@@ -1,17 +1,15 @@
 package se.jherrlin;
 
+import java.io.IOException;
+
 import org.apache.commons.cli.*;
+
 import se.jherrlin.model.Host;
 import se.jherrlin.tcp.TCPClient;
 import se.jherrlin.tcp.TCPServer;
 
 
-import java.io.IOException;
-
-public class Main
-{
-    public static TCPServer tcpserver;
-    public static TCPClient tcpclient;
+public class Main {
 
     public static void main( String[] args ) throws ParseException,IOException {
 

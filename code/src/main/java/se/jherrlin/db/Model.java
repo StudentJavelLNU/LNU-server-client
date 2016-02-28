@@ -1,18 +1,13 @@
 package se.jherrlin.db;
 
-import org.apache.log4j.Logger;
+
 import se.jherrlin.domain.Blog;
 
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Locale;
-import java.util.UUID;
 
-/**
- * Created by nils on 2/18/16.
- */
+
 public class Model implements Serializable{
 
     public String getUuid() {

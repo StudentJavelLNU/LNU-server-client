@@ -3,6 +3,7 @@ package se.jherrlin.model;
 
 import java.util.ArrayList;
 
+
 public class Response {
     String response;
     ArrayList<String> headers = new ArrayList<String>();

@@ -4,13 +4,11 @@ package se.jherrlin.tcp;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.log4j.Logger;
 
 import se.jherrlin.db.Db;
-import se.jherrlin.domain.Blog;
 import se.jherrlin.model.*;
 import se.jherrlin.handlers.*;
 
@@ -28,6 +26,9 @@ public class TCPServer extends Host{
     public void run() throws Exception{
 
         ServerSocket serverSocket = new ServerSocket(this.port);
+
+        // Check and startup db
+        Db.initDb();
 
         while(true) {
             // Accept client when it tries to connect

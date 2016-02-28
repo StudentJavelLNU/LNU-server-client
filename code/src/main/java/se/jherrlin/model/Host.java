@@ -1,10 +1,12 @@
 package se.jherrlin.model;
 
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.validator.routines.InetAddressValidator;
 import org.apache.log4j.Logger;
 
 import se.jherrlin.utils.Utils;
+
 
 public abstract class Host {
 

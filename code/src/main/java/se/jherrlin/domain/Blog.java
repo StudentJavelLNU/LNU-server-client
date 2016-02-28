@@ -4,9 +4,7 @@ package se.jherrlin.domain;
 import se.jherrlin.db.Db;
 import se.jherrlin.db.Model;
 
-/**
- * Created by nils on 2/18/16.
- */
+
 public class Blog extends Model{
     String header;
     String text;

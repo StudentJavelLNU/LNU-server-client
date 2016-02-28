@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Request {
     private HTTPMethod method;
     private String uri;

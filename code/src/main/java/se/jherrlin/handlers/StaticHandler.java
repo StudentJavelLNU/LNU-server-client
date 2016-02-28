@@ -1,11 +1,12 @@
 package se.jherrlin.handlers;
 
-import se.jherrlin.model.Header;
-import se.jherrlin.model.Response;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import se.jherrlin.model.Header;
+import se.jherrlin.model.Response;
 
 
 public class StaticHandler {

@@ -1,12 +1,11 @@
 package se.jherrlin.db;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-/**
- * Created by nils on 2/18/16.
- */
+
 public class Db {
 
     public static void initDb(){

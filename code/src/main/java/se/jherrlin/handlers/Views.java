@@ -1,6 +1,11 @@
 package se.jherrlin.handlers;
 
+
+import java.io.IOException;
+import java.util.UUID;
+
 import org.apache.log4j.Logger;
+
 import se.jherrlin.db.Db;
 import se.jherrlin.domain.Blog;
 import se.jherrlin.model.Header;
@@ -8,12 +13,7 @@ import se.jherrlin.model.Request;
 import se.jherrlin.model.Response;
 import se.jherrlin.tcp.TCPServer;
 
-import java.io.IOException;
-import java.util.UUID;
 
-/**
- * Created by nils on 2/22/16.
- */
 public class Views {
 
     public static void index(Request request){
@@ -93,8 +93,6 @@ public class Views {
 
             response.setBody(request.getBody().getBytes());
             System.out.println("REQUEST BODY: " + request.getBody());
-
-            Db.initDb();
 
             Blog blog = new Blog();
             blog.setUuid(UUID.randomUUID().toString());
