@@ -19,11 +19,13 @@ public class StaticHandler {
         Response response = responseIn;
 
         try{
+            // Try to find file
             File file = new File(StaticHandler.class.getResource(filenameIn).getPath());
 
+            // Check if file is a file or dir.
             if (file.isFile()){
                 Path path = file.toPath();
-                response.setBody(Files.readAllBytes(path));
+                response.setBody(Files.readAllBytes(path));  // Read file as bytes
 
                 // Get file format
                 String[] format = file.getName().split("\\.");
@@ -42,6 +44,7 @@ public class StaticHandler {
                 return;
             }
 
+            // If dir, check if dir contains index.html or index.htm
             if (file.isDirectory()){
                 try{
                     File html = new File(file.getPath()+"/index.html");

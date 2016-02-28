@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
-import se.jherrlin.db.Db;
 import se.jherrlin.domain.Blog;
 import se.jherrlin.model.Header;
 import se.jherrlin.model.Request;
@@ -16,15 +15,19 @@ import se.jherrlin.tcp.TCPServer;
 
 public class Views {
 
+    // The view are taking care of business logic for the endpoints.
+
     public static void index(Request request){
+
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
+
         try {
             Response response = new Response();
             StaticHandler.findStaticFile(request.getUri(), response);
             LOG.debug(request);
             LOG.debug(response);
-            request.getDataOutputStream().write(response.getHeaders());
-            request.getDataOutputStream().write(response.getBody());
+            request.getDataOutputStream().write(response.getHeaders());  // Send response headers
+            request.getDataOutputStream().write(response.getBody());  // Send response body
             request.getDataOutputStream().close();
         }
         catch (Exception e){
@@ -33,6 +36,9 @@ public class Views {
     }
 
     public static void staticfiles(Request request) {
+
+        // Static files, like images and css files
+
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
 
         Response response = new Response();
@@ -64,8 +70,7 @@ public class Views {
     public static void login(Request request) {
         Response response = new Response();
         response.setResponse(Header.response_202_accepted);
-        //response.appendHeader(Header.header_content_type_texthtml);
-        TCPServer.sessions.add(request.headerDataMap.get("Cookie"));
+        TCPServer.sessions.add(request.headerDataMap.get("Cookie"));  // Sets login == true
         response.setResponse(Header.response_202_accepted);
         redirect(response, request, "/");
     }
@@ -84,6 +89,8 @@ public class Views {
     }
 
     public static void post(Request request) {
+
+        // Create new blog post
 
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
 
@@ -144,6 +151,8 @@ public class Views {
 
     public static void put(Request request) {
 
+        // Update blog post
+
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
 
         Response response = new Response();
@@ -192,6 +201,8 @@ public class Views {
     }
 
     public static void updateAllBlogPosts(Request request) {
+
+        // Sends forms with all blog posts
 
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
 
@@ -245,13 +256,16 @@ public class Views {
             request.getDataOutputStream().write(response.getHeaders());
             request.getDataOutputStream().write(response.getBody());
             request.getDataOutputStream().close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LOG.debug(e);
         }
     }
 
     public static void notfound(Request request) {
+
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
+
         try {
             Response response = new Response();
             response.setResponse(Header.response_404_notfound);
@@ -261,13 +275,16 @@ public class Views {
             request.getDataOutputStream().write(response.getHeaders());
             request.getDataOutputStream().write(response.getBody());
             request.getDataOutputStream().close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LOG.debug(e);
         }
     }
 
     public static void permissionDenied(Request request) {
+
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
+
         try {
             Response response = new Response();
             response.setResponse(Header.response_403_forbidden);
@@ -278,12 +295,14 @@ public class Views {
             request.getDataOutputStream().write(response.getHeaders());
             request.getDataOutputStream().write(response.getBody());
             request.getDataOutputStream().close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             LOG.debug(e);
         }
     }
 
     public static void getAllBlogPosts(Request request) {
+
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
 
         try {
@@ -315,13 +334,18 @@ public class Views {
             request.getDataOutputStream().write(response.getHeaders());
             request.getDataOutputStream().write(response.getBody());
             request.getDataOutputStream().close();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             LOG.debug(e);
         }
     }
 
     private static void redirect(Response response, Request request, String endpoint) {
+
+        // Redirect
+
         final Logger LOG = Logger.getLogger(RequestHandler.class.getSimpleName());
+
         String redirectUrlString = "" +
                 "<!DOCTYPE HTML>\n" +
                 "<html lang=\"en-US\">\n" +
@@ -338,15 +362,14 @@ public class Views {
                 "    </body>\n" +
                 "</html>";
 
-
-        //response.setResponse(Header.response_200_ok);
         response.appendHeader(Header.header_content_type_texthtml);
 
         try {
             request.getDataOutputStream().write(response.getHeaders());
             request.getDataOutputStream().write(redirectUrlString.getBytes());
             request.getDataOutputStream().close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             LOG.debug(e);
         }
     }

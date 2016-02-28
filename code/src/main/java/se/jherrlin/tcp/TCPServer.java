@@ -96,6 +96,7 @@ class ServerThread extends Thread {
                 request.getDataOutputStream().close();
             }
             else {
+                // Send request to urls.
                 Urls.urls(request);
             }
         }

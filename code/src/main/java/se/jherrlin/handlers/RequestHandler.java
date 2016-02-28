@@ -11,6 +11,7 @@ import se.jherrlin.model.Request;
 
 public class RequestHandler {
 
+    // Here we try to parse the request into a request object.
     // This classes will be ugly, a lot of parsing
 
     public static Request RequestParser(String requestStringIn){
